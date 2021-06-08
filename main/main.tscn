@@ -1,0 +1,124 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://case_file/case_file.tscn" type="PackedScene" id=1]
+[ext_resource path="res://evidence_card/evidence_card.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/pixel_font_8.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/pixel_font_16.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fonts/pixel_font_10.tres" type="DynamicFont" id=5]
+[ext_resource path="res://main/main.gd" type="Script" id=6]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerLabel" type="Label" parent="."]
+margin_left = 140.0
+margin_top = 2.0
+margin_right = 180.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 4 )
+text = "60"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CaseNumberLabel" type="Label" parent="."]
+margin_left = 140.0
+margin_top = 11.6673
+margin_right = 180.0
+margin_bottom = 28.6673
+custom_fonts/font = ExtResource( 5 )
+text = "1 of 10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DrawsLabel" type="Label" parent="."]
+margin_left = 243.598
+margin_top = 6.3033
+margin_right = 312.598
+margin_bottom = 23.3033
+custom_fonts/font = ExtResource( 4 )
+text = "draws   10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StrikesEmptyLabel" type="Label" parent="."]
+margin_left = 7.0
+margin_top = 6.0
+margin_right = 48.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.498039, 0.466667, 0.466667, 1 )
+text = "X  X  X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StrikesLabel" type="Label" parent="."]
+margin_left = 7.0
+margin_top = 6.0
+margin_right = 48.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GuiltyButton" type="Button" parent="."]
+margin_left = 7.0
+margin_top = 30.0
+margin_right = 56.0
+margin_bottom = 120.0
+custom_fonts/font = ExtResource( 3 )
+text = "GUILTY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NotGuiltyButton" type="Button" parent="."]
+margin_left = 265.448
+margin_top = 30.0
+margin_right = 314.448
+margin_bottom = 120.0
+custom_fonts/font = ExtResource( 3 )
+text = "NOT GUILTY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CaseFile" parent="." instance=ExtResource( 1 )]
+position = Vector2( 60, -150 )
+
+[node name="EvidenceCard1" parent="." instance=ExtResource( 2 )]
+position = Vector2( 13, 200 )
+
+[node name="EvidenceCard2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 88, 200 )
+
+[node name="EvidenceCard3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 163, 200 )
+
+[node name="EvidenceCard4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 238, 200 )
+
+[node name="TweenIn" type="Tween" parent="."]
+
+[node name="TweenOut" type="Tween" parent="."]
+
+[connection signal="pressed" from="GuiltyButton" to="." method="_on_GuiltyButton_pressed"]
+[connection signal="tween_all_completed" from="TweenIn" to="." method="_on_TweenIn_tween_all_completed"]
+[connection signal="tween_all_completed" from="TweenOut" to="." method="_on_TweenOut_tween_all_completed"]
