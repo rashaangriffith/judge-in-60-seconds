@@ -119,6 +119,9 @@ position = Vector2( 238, 200 )
 
 [node name="TweenOut" type="Tween" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="pressed" from="GuiltyButton" to="." method="_on_GuiltyButton_pressed"]
 [connection signal="tween_all_completed" from="TweenIn" to="." method="_on_TweenIn_tween_all_completed"]
 [connection signal="tween_all_completed" from="TweenOut" to="." method="_on_TweenOut_tween_all_completed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
