@@ -13,6 +13,8 @@ enum CARD_TYPE {
 }
 
 signal player_loaded()
+signal evidence_card_activated(card_number)
+signal evidence_card_deactivated()
 
 const MAX_STRIKES = 3
 
@@ -54,6 +56,8 @@ func load_player():
 	}
 
 func get_card_title(type):
+	print("get_card_title: " + str(type))
+	print("alibi type: " + str(CARD_TYPE.ALIBI))
 	match type:
 		CARD_TYPE.ALIBI:
 			return "ALIBI"
@@ -62,12 +66,21 @@ func get_card_title(type):
 		CARD_TYPE.WITNESS:
 			return "WITNESS"
 		CARD_TYPE.PHYSICAL_EVIDENCE:
-			return "PHYSICAL EVIDENCE"
+			return "PHYSICAL"
+		CARD_TYPE.INDIVIDUAL_EVIDENCE:
+			return "INDIVIDUAL"
 		CARD_TYPE.FORENSICS:
 			return "FORENSICS"
 		CARD_TYPE.EXPERT_TESTIMONY:
-			return "EXPERT TESTIMONY"
+			return "EXPERT"
 		CARD_TYPE.OCCUPATION:
 			return "OCCUPATION"
 		CARD_TYPE.CHARACTER:
 			return "CHARACTER"
+
+func activate_evidence_card(card_number):
+	emit_signal("evidence_card_activated", card_number)
+	
+func deactivate_evidence_card():
+	print("gm deactive ev card")
+	emit_signal("evidence_card_deactivated")

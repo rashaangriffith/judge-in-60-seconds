@@ -44,13 +44,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="DrawButton" type="Button" parent="."]
+margin_left = 256.11
+margin_top = 2.68502
+margin_right = 314.11
+margin_bottom = 19.685
+custom_fonts/font = ExtResource( 5 )
+disabled = true
+text = "DRAW"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="DrawsLabel" type="Label" parent="."]
-margin_left = 243.598
-margin_top = 6.3033
-margin_right = 312.598
-margin_bottom = 23.3033
-custom_fonts/font = ExtResource( 4 )
+margin_left = 257.394
+margin_top = 16.9296
+margin_right = 315.394
+margin_bottom = 31.9296
+custom_fonts/font = ExtResource( 5 )
 text = "draws   10"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -105,23 +119,34 @@ position = Vector2( 60, -150 )
 
 [node name="EvidenceCard1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 13, 200 )
+card_number = 1
 
 [node name="EvidenceCard2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 88, 200 )
+card_number = 2
 
 [node name="EvidenceCard3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 163, 200 )
+card_number = 3
 
 [node name="EvidenceCard4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 238, 200 )
+card_number = 4
 
 [node name="TweenIn" type="Tween" parent="."]
 
 [node name="TweenOut" type="Tween" parent="."]
 
+[node name="TweenOutDraw" type="Tween" parent="."]
+
+[node name="TweenInDraw" type="Tween" parent="."]
+
 [node name="Timer" type="Timer" parent="."]
 
+[connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="GuiltyButton" to="." method="_on_GuiltyButton_pressed"]
 [connection signal="tween_all_completed" from="TweenIn" to="." method="_on_TweenIn_tween_all_completed"]
 [connection signal="tween_all_completed" from="TweenOut" to="." method="_on_TweenOut_tween_all_completed"]
+[connection signal="tween_all_completed" from="TweenOutDraw" to="." method="_on_TweenOutDraw_tween_all_completed"]
+[connection signal="tween_all_completed" from="TweenInDraw" to="." method="_on_TweenInDraw_tween_all_completed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

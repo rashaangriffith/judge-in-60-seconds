@@ -7,26 +7,53 @@ onready var evidence_card_3 = $EvidenceCard3
 onready var evidence_card_4 = $EvidenceCard4
 onready var tween_in = $TweenIn
 onready var tween_out = $TweenOut
+onready var tween_out_draw = $TweenOutDraw
+onready var tween_in_draw = $TweenInDraw
+onready var draw_button = $DrawButton
+onready var draws_label = $DrawsLabel
 
-var CASE_FILE_OUT_Y = -150
-var CASE_FILE_IN_Y = 25
-var CARD_OUT_Y = 200
-var CARD_IN_Y = 125
+const HAND_SIZE = 4
+const MAX_DRAWS = 5
+const CASE_FILE_OUT_Y = -150
+const CASE_FILE_IN_Y = 25
+const CARD_OUT_Y = 200
+const CARD_IN_Y = 125
 
 var current_case_number = 1
 var total_cases_number = 1
 var strikes = 0
-var remaining_draws = 5
+var remaining_draws = MAX_DRAWS
 var remaining_case_time = 60
+var active_evidence_card
 
 var case = {}
+var pool = []
+var hand = []
 
 func _ready():
+	evidence_card_1.connect("activated", self, "_on_Evidence_Card_1_activated")
+	evidence_card_2.connect("activated", self, "_on_Evidence_Card_2_activated")
+	evidence_card_3.connect("activated", self, "_on_Evidence_Card_3_activated")
+	evidence_card_4.connect("activated", self, "_on_Evidence_Card_4_activated")
+	GameManager.connect("evidence_card_activated", self, "_on_GameManager_evidence_card_activated")
+	GameManager.connect("evidence_card_deactivated", self, "_on_GameManager_evidence_card_deactivated")
+	
+	if (GameManager.player.deck.size() - HAND_SIZE) > MAX_DRAWS:
+		remaining_draws = MAX_DRAWS
+	else:
+		remaining_draws = GameManager.player.deck.size() - HAND_SIZE
+	draws_label.text = "DRAWS: " + str(remaining_draws)
+	
 	generate_case()
+	print("hand: " + str(hand))
 	populate_case()
 	tween_slide_in()
 	
 func generate_case():
+	pool = GameManager.player.deck
+	for n in 4:
+		draw_card(n)
+	
 	case = {
 	"perp_name": "Joe Bob",
 	"crime": "Drug Sales",
@@ -70,13 +97,30 @@ func generate_case():
 	]
 }
 
+func draw_card(index):
+	var pool_count = pool.size()
+	print("draw card pool count: " + str(pool_count))
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var pool_index = rng.randi_range(0, pool_count - 1)
+	hand.insert(index, pool[pool_index])
+	pool.remove(pool_index)
+
 func populate_case():
 	var deck = GameManager.player.deck
 	case_file.populate(case)
-	evidence_card_1.populate(deck[0], case.deck)
-	evidence_card_2.populate(deck[1], case.deck)
-	evidence_card_3.populate(deck[2], case.deck)
-	evidence_card_4.populate(deck[3], case.deck)
+	for n in 4:
+		populate_evidence_card(n)
+
+func populate_evidence_card(hand_index):
+	if hand_index == 0:
+		evidence_card_1.populate(hand[hand_index], case.deck)
+	elif hand_index == 1:
+		evidence_card_2.populate(hand[hand_index], case.deck)
+	elif hand_index == 2:
+		evidence_card_3.populate(hand[hand_index], case.deck)
+	elif hand_index == 3:
+		evidence_card_4.populate(hand[hand_index], case.deck)
 
 func tween_slide_in():
 	tween_in.interpolate_property(case_file, "position", case_file.position, Vector2(case_file.position.x, CASE_FILE_IN_Y), 1, Tween.TRANS_CUBIC, Tween.EASE_OUT)
@@ -113,3 +157,51 @@ func _on_Timer_timeout():
 		if strikes > GameManager.MAX_STRIKES:
 			# game over
 			pass
+
+func _on_GameManager_evidence_card_activated(card_number):
+	if card_number == 1:
+		evidence_card_2.deactivate()
+		evidence_card_3.deactivate()
+		evidence_card_4.deactivate()
+		active_evidence_card = evidence_card_1
+	elif card_number == 2:
+		evidence_card_1.deactivate()
+		evidence_card_3.deactivate()
+		evidence_card_4.deactivate()
+		active_evidence_card = evidence_card_2
+	elif card_number == 3:
+		evidence_card_1.deactivate()
+		evidence_card_2.deactivate()
+		evidence_card_4.deactivate()
+		active_evidence_card = evidence_card_3
+	elif card_number == 4:
+		evidence_card_1.deactivate()
+		evidence_card_2.deactivate()
+		evidence_card_3.deactivate()
+		active_evidence_card = evidence_card_4
+	
+	if remaining_draws > 0:
+		draw_button.disabled = false
+
+func _on_GameManager_evidence_card_deactivated():
+	print("card deactivated")
+	draw_button.disabled = true
+
+func _on_DrawButton_pressed():
+	tween_out_draw.interpolate_property(active_evidence_card, "position", active_evidence_card.position, Vector2(active_evidence_card.position.x, CARD_OUT_Y), 0.25, Tween.TRANS_BACK, Tween.EASE_IN)
+	tween_out_draw.start()
+	remaining_draws -= 1
+	draws_label.text = "DRAWS: " + str(remaining_draws)
+	if remaining_draws == 0:
+		draw_button.disabled = true
+
+func _on_TweenOutDraw_tween_all_completed():
+	var index = active_evidence_card.card_number - 1
+	hand.remove(index)
+	draw_card(index)
+	populate_evidence_card(index)
+	tween_in_draw.interpolate_property(active_evidence_card, "position", active_evidence_card.position, Vector2(active_evidence_card.position.x, active_evidence_card.UP_Y), 0.75, Tween.TRANS_BACK, Tween.EASE_OUT, 0.5)
+	tween_in_draw.start()
+
+func _on_TweenInDraw_tween_all_completed():
+	pass
