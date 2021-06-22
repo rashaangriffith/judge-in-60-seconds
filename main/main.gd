@@ -45,66 +45,79 @@ func _ready():
 	draws_label.text = "DRAWS: " + str(remaining_draws)
 	
 	generate_case()
-	print("hand: " + str(hand))
 	populate_case()
 	tween_slide_in()
 	
 func generate_case():
-	pool = GameManager.player.deck
+	pool = GameManager.player.deck.duplicate(true)
 	for n in 4:
 		draw_card(n)
+
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var first_name = CaseData.first_names[rng.randi_range(0, CaseData.first_names.size() - 1)]
+	rng.randomize()
+	var last_name = CaseData.last_names[rng.randi_range(0, CaseData.last_names.size() - 1)]
+	rng.randomize()
+	var crime = CaseData.crimes[rng.randi_range(0, CaseData.crimes.size() - 1)]
+	rng.randomize()
+	var is_guilty = rng.randi_range(0, 1) == 0
 	
 	case = {
-	"perp_name": "Joe Bob",
-	"crime": "Drug Sales",
-	"deck": [
-		{
-			"type": GameManager.CARD_TYPE.ALIBI,
-			"detail1": "no",
-			"detail2": "",
-			"detail3": "",
-		},
-		{
-			"type": GameManager.CARD_TYPE.PRIORS,
-			"detail1": "yes",
-			"detail2": "petty theft",
-			"detail3": "stealing candy"
-		},
-		{
-			"type": GameManager.CARD_TYPE.WITNESS,
-			"detail1": "yes",
-			"detail2": "old lady",
-			"detail3": "is legally blind"
-		},
-		{
-			"type": GameManager.CARD_TYPE.PHYSICAL_EVIDENCE,
-			"detail1": "no",
-			"detail2": "",
-			"detail3": "",
-		},
-		{
-			"type": GameManager.CARD_TYPE.INDIVIDUAL_EVIDENCE,
-			"detail1": "yes",
-			"detail2": "drugs on person",
-			"detail3": "",
-		},
-		{
-			"type": GameManager.CARD_TYPE.FORENSICS,
-			"detail1": "yes",
-			"detail2": "substance found under fingernails",
-			"detail3": "not illegal substance"
-		},
-	]
-}
+		"first_name": first_name,
+		"last_name": last_name,
+		"crime": crime,
+		"is_guilty": is_guilty,
+		"deck": [
+			{
+				"type": GameManager.CARD_TYPE.ALIBI,
+				"detail1": "no",
+				"detail2": "",
+				"detail3": "",
+			},
+			{
+				"type": GameManager.CARD_TYPE.PRIORS,
+				"detail1": "yes",
+				"detail2": "petty theft",
+				"detail3": "stealing candy"
+			},
+			{
+				"type": GameManager.CARD_TYPE.WITNESS,
+				"detail1": "yes",
+				"detail2": "old lady",
+				"detail3": "is legally blind"
+			},
+			{
+				"type": GameManager.CARD_TYPE.PHYSICAL_EVIDENCE,
+				"detail1": "no",
+				"detail2": "",
+				"detail3": "",
+			},
+			{
+				"type": GameManager.CARD_TYPE.INDIVIDUAL_EVIDENCE,
+				"detail1": "yes",
+				"detail2": "drugs on person",
+				"detail3": "",
+			},
+			{
+				"type": GameManager.CARD_TYPE.FORENSICS,
+				"detail1": "yes",
+				"detail2": "substance found under fingernails",
+				"detail3": "not illegal substance"
+			},
+		]
+	}
 
 func draw_card(index):
 	var pool_count = pool.size()
 	print("draw card pool count: " + str(pool_count))
+	print("draw card player deck count: " + str(GameManager.player.deck.size()))
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var pool_index = rng.randi_range(0, pool_count - 1)
 	hand.insert(index, pool[pool_index])
 	pool.remove(pool_index)
+	
 
 func populate_case():
 	var deck = GameManager.player.deck
@@ -138,15 +151,12 @@ func tween_slide_out():
 	tween_out.interpolate_property(evidence_card_4, "position", evidence_card_4.position, Vector2(evidence_card_4.position.x, CARD_OUT_Y), 0.25, Tween.TRANS_BACK, Tween.EASE_IN)
 	tween_out.start()
 
-
-func _on_GuiltyButton_pressed():
-	tween_slide_out()
-
-
 func _on_TweenIn_tween_all_completed():
 	pass # Replace with function body.
 
 func _on_TweenOut_tween_all_completed():
+	generate_case()
+	populate_case()
 	tween_slide_in()
 
 
@@ -205,3 +215,9 @@ func _on_TweenOutDraw_tween_all_completed():
 
 func _on_TweenInDraw_tween_all_completed():
 	pass
+
+func _on_GuiltyButton_pressed():
+	tween_slide_out()
+
+func _on_NotGuiltyButton_pressed():
+	tween_slide_out()

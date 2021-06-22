@@ -145,6 +145,7 @@ card_number = 4
 
 [connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="GuiltyButton" to="." method="_on_GuiltyButton_pressed"]
+[connection signal="pressed" from="NotGuiltyButton" to="." method="_on_NotGuiltyButton_pressed"]
 [connection signal="tween_all_completed" from="TweenIn" to="." method="_on_TweenIn_tween_all_completed"]
 [connection signal="tween_all_completed" from="TweenOut" to="." method="_on_TweenOut_tween_all_completed"]
 [connection signal="tween_all_completed" from="TweenOutDraw" to="." method="_on_TweenOutDraw_tween_all_completed"]
