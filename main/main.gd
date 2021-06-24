@@ -11,8 +11,15 @@ onready var tween_out_draw = $TweenOutDraw
 onready var tween_in_draw = $TweenInDraw
 onready var draw_button = $DrawButton
 onready var draws_label = $DrawsLabel
+onready var verdict = $Verdict
+onready var success_label = $Verdict/SuccessLabel
+onready var fail_label = $Verdict/FailLabel
+onready var tween_verdict = $TweenVerdict
+onready var strikes_label = $StrikesLabel
+onready var case_number_label = $CaseNumberLabel
 
 const HAND_SIZE = 4
+const MAX_CASES = 10
 const MAX_DRAWS = 5
 const CASE_FILE_OUT_Y = -150
 const CASE_FILE_IN_Y = 25
@@ -151,6 +158,19 @@ func tween_slide_out():
 	tween_out.interpolate_property(evidence_card_4, "position", evidence_card_4.position, Vector2(evidence_card_4.position.x, CARD_OUT_Y), 0.25, Tween.TRANS_BACK, Tween.EASE_IN)
 	tween_out.start()
 
+func show_verdict():
+	tween_verdict.interpolate_property(verdict, "scale", 0, 1, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	tween_verdict.interpolate_property(verdict, "scale", 1, 0, 0.5, Tween.TRANS_BOUNCE, Tween.EASE_IN, 2)
+	tween_verdict.start()
+	
+func update_case_number():
+	current_case_number += 1
+	case_number_label.text = str(current_case_number) + " of " + str(MAX_CASES)
+
+func update_strikes(diff):
+	strikes += diff
+	strikes_label.text = strikes_label.text + "x"
+
 func _on_TweenIn_tween_all_completed():
 	pass # Replace with function body.
 
@@ -217,7 +237,26 @@ func _on_TweenInDraw_tween_all_completed():
 	pass
 
 func _on_GuiltyButton_pressed():
-	tween_slide_out()
+	if case.is_guilty:
+		success_label.visible = true
+	else:
+		fail_label.visible = true
+		update_strikes(1)
+	
+	show_verdict()
+	
 
 func _on_NotGuiltyButton_pressed():
+	if not case.is_guilty:
+		success_label.visible = true
+	else:
+		fail_label.visible = true
+		update_strikes(1)
+		
+	show_verdict()
+
+func _on_TweenVerdict_tween_all_completed():
+	success_label.visible = false
+	fail_label.visible = false
+	update_case_number()
 	tween_slide_out()
