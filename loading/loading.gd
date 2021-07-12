@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready():
-	print("loading ready")
+#	print("loading ready")
 	GameManager.connect("player_loaded", self, "_on_GameManager_player_loaded")
 
 func _on_GameManager_player_loaded():

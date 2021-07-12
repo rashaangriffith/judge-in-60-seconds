@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fonts/pixel_font_16.tres" type="DynamicFont" id=1]
+[ext_resource path="res://evidence_card/evidence_card.tscn" type="PackedScene" id=2]
+
+[node name="ViewCards" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 140.0
+margin_top = 7.0
+margin_right = 180.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 1 )
+text = "DECK"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page" type="Node2D" parent="."]
+
+[node name="EvidenceCard" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 22, 26 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard2" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 22, 102 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard3" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 78, 26 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard4" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 78, 102 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard5" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 134, 26 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard6" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 134, 102 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard7" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 190, 26 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard8" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 190, 102 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard9" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 246, 26 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard10" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 246, 102 )
+scale = Vector2( 0.75, 0.75 )

@@ -22,7 +22,7 @@ var player = {}
 
 func start_game():
 	player = load_player()
-	print("game_manager emit player loaded")
+#	print("game_manager emit player loaded")
 	emit_signal("player_loaded")
 
 func load_player():
@@ -56,8 +56,8 @@ func load_player():
 	}
 
 func get_card_title(type):
-	print("get_card_title: " + str(type))
-	print("alibi type: " + str(CARD_TYPE.ALIBI))
+#	print("get_card_title: " + str(type))
+#	print("alibi type: " + str(CARD_TYPE.ALIBI))
 	match type:
 		CARD_TYPE.ALIBI:
 			return "ALIBI"
@@ -82,5 +82,5 @@ func activate_evidence_card(card_number):
 	emit_signal("evidence_card_activated", card_number)
 	
 func deactivate_evidence_card():
-	print("gm deactive ev card")
+#	print("gm deactive ev card")
 	emit_signal("evidence_card_deactivated")

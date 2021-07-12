@@ -135,7 +135,7 @@ position = Vector2( 238, 200 )
 card_number = 4
 
 [node name="Verdict" type="Node2D" parent="."]
-position = Vector2( 160.955, 79.0601 )
+position = Vector2( 160, 80 )
 
 [node name="SuccessLabel" type="Label" parent="Verdict"]
 visible = false
@@ -163,6 +163,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GameOver" type="Node2D" parent="."]
+position = Vector2( -80, 80 )
+
+[node name="YouWinLabel" type="Label" parent="GameOver"]
+margin_left = -44.0
+margin_top = 5.0
+margin_right = 56.0
+margin_bottom = 23.5
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+text = "YOU  WIN!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YouLoseLabel" type="Label" parent="GameOver"]
+margin_left = -50.0
+margin_top = 5.0
+margin_right = 61.0
+margin_bottom = 23.5
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "YOU  LOSE!!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="GameOver"]
+margin_left = -41.0
+margin_top = 29.0
+margin_right = 43.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 4 )
+text = "CONTINUE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TweenIn" type="Tween" parent="."]
 
 [node name="TweenOut" type="Tween" parent="."]
@@ -173,11 +212,14 @@ __meta__ = {
 
 [node name="TweenVerdict" type="Tween" parent="."]
 
+[node name="TweenGameOver" type="Tween" parent="."]
+
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="pressed" from="DrawButton" to="." method="_on_DrawButton_pressed"]
 [connection signal="pressed" from="GuiltyButton" to="." method="_on_GuiltyButton_pressed"]
 [connection signal="pressed" from="NotGuiltyButton" to="." method="_on_NotGuiltyButton_pressed"]
+[connection signal="pressed" from="GameOver/ContinueButton" to="." method="_on_ContinueButton_pressed"]
 [connection signal="tween_all_completed" from="TweenIn" to="." method="_on_TweenIn_tween_all_completed"]
 [connection signal="tween_all_completed" from="TweenOut" to="." method="_on_TweenOut_tween_all_completed"]
 [connection signal="tween_all_completed" from="TweenOutDraw" to="." method="_on_TweenOutDraw_tween_all_completed"]

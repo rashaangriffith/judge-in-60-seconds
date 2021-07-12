@@ -14,9 +14,9 @@ var isActive = false
 var isTweening = false
 
 func populate(player_card, case_deck):
-	print("populate: " + str(player_card.type))
+#	print("populate: " + str(player_card.type))
 	var card_title = GameManager.get_card_title(player_card.type)
-	print("card title: " + str(card_title))
+#	print("card title: " + str(card_title))
 	title.text = card_title
 	
 	for case_card in case_deck:
