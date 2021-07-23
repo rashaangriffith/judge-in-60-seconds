@@ -62,3 +62,4 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Background/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Background/ViewCardsButton" to="." method="_on_ViewCardsButton_pressed"]

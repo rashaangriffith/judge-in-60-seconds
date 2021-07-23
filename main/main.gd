@@ -22,6 +22,7 @@ onready var you_win_label = $GameOver/YouWinLabel
 onready var you_lose_label = $GameOver/YouLoseLabel
 onready var tween_game_over = $TweenGameOver
 onready var continue_button = $GameOver/ContinueButton
+onready var pause_screen = $PauseScreen
 
 const HAND_SIZE = 4
 const MAX_CASES = 3
@@ -56,6 +57,10 @@ func _ready():
 	generate_case()
 	populate_case()
 	tween_slide_in()
+
+func _process(delta):
+	if Input.is_action_pressed("pause"):
+		pause_screen.show()
 	
 func generate_case():
 	pool = GameManager.player.deck.duplicate(true)

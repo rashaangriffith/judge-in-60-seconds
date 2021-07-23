@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/pixel_font_16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://evidence_card/evidence_card.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/pixel_font_10.tres" type="DynamicFont" id=3]
+[ext_resource path="res://view_cards/view_cards.gd" type="Script" id=4]
 
-[node name="ViewCards" type="Node2D"]
+[node name="ViewCards" type="Popup"]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 320.0
@@ -30,7 +36,7 @@ __meta__ = {
 
 [node name="Page" type="Node2D" parent="."]
 
-[node name="EvidenceCard" parent="Page" instance=ExtResource( 2 )]
+[node name="EvidenceCard1" parent="Page" instance=ExtResource( 2 )]
 position = Vector2( 22, 26 )
 scale = Vector2( 0.75, 0.75 )
 
@@ -69,3 +75,38 @@ scale = Vector2( 0.75, 0.75 )
 [node name="EvidenceCard10" parent="Page" instance=ExtResource( 2 )]
 position = Vector2( 246, 102 )
 scale = Vector2( 0.75, 0.75 )
+
+[node name="BackButton" type="Button" parent="."]
+margin_left = 1.0
+margin_top = 68.6685
+margin_right = 20.3348
+margin_bottom = 130.669
+custom_fonts/font = ExtResource( 3 )
+text = "B"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextButton" type="Button" parent="."]
+margin_left = 300.005
+margin_top = 68.6685
+margin_right = 319.339
+margin_bottom = 130.669
+custom_fonts/font = ExtResource( 3 )
+text = "N"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Button" parent="."]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 45.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 3 )
+text = "CLOSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]
