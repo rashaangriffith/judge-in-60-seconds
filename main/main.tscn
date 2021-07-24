@@ -229,3 +229,4 @@ __meta__ = {
 [connection signal="tween_all_completed" from="TweenInDraw" to="." method="_on_TweenInDraw_tween_all_completed"]
 [connection signal="tween_all_completed" from="TweenVerdict" to="." method="_on_TweenVerdict_tween_all_completed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="visibility_changed" from="PauseScreen" to="." method="_on_PauseScreen_visibility_changed"]

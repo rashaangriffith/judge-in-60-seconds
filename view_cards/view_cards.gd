@@ -9,7 +9,7 @@ var deck
 var current_page = 1
 
 func _ready():
-	deck = GameManager.player.deck
+	deck = GameManager.load_deck()
 	update_buttons()
 	
 #func load_cards():

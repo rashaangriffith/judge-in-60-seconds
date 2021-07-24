@@ -39,6 +39,7 @@ var remaining_draws = MAX_DRAWS
 var remaining_case_time = 60
 var active_evidence_card
 var is_game_over = false
+var is_game_paused = false
 
 var case = {}
 var pool = []
@@ -59,8 +60,11 @@ func _ready():
 	tween_slide_in()
 
 func _process(delta):
-	if Input.is_action_pressed("pause"):
-		pause_screen.show()
+	if Input.is_action_just_pressed("pause"):
+		if is_game_paused:
+			pause_screen.hide()
+		else:
+			pause_screen.show()
 	
 func generate_case():
 	pool = GameManager.player.deck.duplicate(true)
@@ -338,3 +342,7 @@ func _on_ContinueButton_pressed():
 	
 	print("_on_ContinueButton_pressed - slide out")
 	tween_slide_out()
+
+
+func _on_PauseScreen_visibility_changed():
+	is_game_paused = pause_screen.visible

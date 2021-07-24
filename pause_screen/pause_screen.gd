@@ -1,5 +1,7 @@
 extends Popup
 
+signal screen_hidden()
+
 onready var continue_button = $Background/ContinueButton
 onready var view_cards_button = $Background/ViewCardsButton
 onready var quit_button = $Background/QuitButton

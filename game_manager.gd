@@ -25,9 +25,8 @@ func start_game():
 #	print("game_manager emit player loaded")
 	emit_signal("player_loaded")
 
-func load_player():
-	return {
-		"deck": [
+func load_deck():
+	return [
 			{
 				"id": 1,
 				"type": CARD_TYPE.ALIBI
@@ -53,7 +52,9 @@ func load_player():
 				"type": CARD_TYPE.FORENSICS
 			},
 		]
-	}
+
+func load_player():
+	return { "deck": load_deck() }
 
 func get_card_title(type):
 #	print("get_card_title: " + str(type))

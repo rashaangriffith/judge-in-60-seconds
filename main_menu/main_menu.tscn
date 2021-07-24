@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://fonts/pixel_font_16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://main_menu/main_menu.gd" type="Script" id=2]
+[ext_resource path="res://view_cards/view_cards.tscn" type="PackedScene" id=3]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 2 )
@@ -60,6 +61,8 @@ text = "VIEW CARDS"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ViewCards" parent="." instance=ExtResource( 3 )]
 
 [connection signal="pressed" from="Background/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="Background/ViewCardsButton" to="." method="_on_ViewCardsButton_pressed"]
