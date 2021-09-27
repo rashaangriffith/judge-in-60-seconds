@@ -51,6 +51,78 @@ func load_deck():
 				"id": 6,
 				"type": CARD_TYPE.FORENSICS
 			},
+			{
+				"id": 7,
+				"type": CARD_TYPE.ALIBI
+			},
+			{
+				"id": 8,
+				"type": CARD_TYPE.PRIORS
+			},
+			{
+				"id": 9,
+				"type": CARD_TYPE.WITNESS
+			},
+			{
+				"id": 10,
+				"type": CARD_TYPE.PHYSICAL_EVIDENCE
+			},
+			{
+				"id": 11,
+				"type": CARD_TYPE.INDIVIDUAL_EVIDENCE
+			},
+			{
+				"id": 12,
+				"type": CARD_TYPE.FORENSICS
+			},
+			{
+				"id": 13,
+				"type": CARD_TYPE.ALIBI
+			},
+			{
+				"id": 14,
+				"type": CARD_TYPE.PRIORS
+			},
+			{
+				"id": 15,
+				"type": CARD_TYPE.WITNESS
+			},
+			{
+				"id": 16,
+				"type": CARD_TYPE.PHYSICAL_EVIDENCE
+			},
+			{
+				"id": 17,
+				"type": CARD_TYPE.INDIVIDUAL_EVIDENCE
+			},
+			{
+				"id": 18,
+				"type": CARD_TYPE.FORENSICS
+			},
+			{
+				"id": 19,
+				"type": CARD_TYPE.ALIBI
+			},
+			{
+				"id": 20,
+				"type": CARD_TYPE.PRIORS
+			},
+			{
+				"id": 21,
+				"type": CARD_TYPE.WITNESS
+			},
+			{
+				"id": 22,
+				"type": CARD_TYPE.PHYSICAL_EVIDENCE
+			},
+			{
+				"id": 23,
+				"type": CARD_TYPE.INDIVIDUAL_EVIDENCE
+			},
+			{
+				"id": 24,
+				"type": CARD_TYPE.FORENSICS
+			},
 		]
 
 func load_player():

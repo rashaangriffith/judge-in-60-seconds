@@ -12,18 +12,29 @@ const DOWN_Y = 125
 export var card_number = 0;
 var isActive = false
 var isTweening = false
+var isPopulated = false
 
-func populate(player_card, case_deck):
+func populate(player_card, case_deck = null):
 #	print("populate: " + str(player_card.type))
 	var card_title = GameManager.get_card_title(player_card.type)
 #	print("card title: " + str(card_title))
 	title.text = card_title
 	
-	for case_card in case_deck:
-		if case_card.type == player_card.type:
-			detail1.text = case_card.detail1
-			detail2.text = case_card.detail2
-			detail3.text = case_card.detail3
+	if case_deck:
+		for case_card in case_deck:
+			if case_card.type == player_card.type:
+				detail1.text = case_card.detail1
+				detail2.text = case_card.detail2
+				detail3.text = case_card.detail3
+	
+	isPopulated = true
+
+func unpopulate():
+	title.text = ""
+	detail1.text = ""
+	detail2.text = ""
+	detail3.text = ""
+	isPopulated = false
 
 func activate():
 	if isActive:

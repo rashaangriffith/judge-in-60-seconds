@@ -41,35 +41,35 @@ position = Vector2( 22, 26 )
 scale = Vector2( 0.75, 0.75 )
 
 [node name="EvidenceCard2" parent="Page" instance=ExtResource( 2 )]
-position = Vector2( 22, 102 )
-scale = Vector2( 0.75, 0.75 )
-
-[node name="EvidenceCard3" parent="Page" instance=ExtResource( 2 )]
 position = Vector2( 78, 26 )
 scale = Vector2( 0.75, 0.75 )
 
-[node name="EvidenceCard4" parent="Page" instance=ExtResource( 2 )]
-position = Vector2( 78, 102 )
-scale = Vector2( 0.75, 0.75 )
-
-[node name="EvidenceCard5" parent="Page" instance=ExtResource( 2 )]
+[node name="EvidenceCard3" parent="Page" instance=ExtResource( 2 )]
 position = Vector2( 134, 26 )
 scale = Vector2( 0.75, 0.75 )
 
-[node name="EvidenceCard6" parent="Page" instance=ExtResource( 2 )]
-position = Vector2( 134, 102 )
-scale = Vector2( 0.75, 0.75 )
-
-[node name="EvidenceCard7" parent="Page" instance=ExtResource( 2 )]
+[node name="EvidenceCard4" parent="Page" instance=ExtResource( 2 )]
 position = Vector2( 190, 26 )
 scale = Vector2( 0.75, 0.75 )
 
+[node name="EvidenceCard5" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 246, 26 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard6" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 22, 102 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="EvidenceCard7" parent="Page" instance=ExtResource( 2 )]
+position = Vector2( 78, 102 )
+scale = Vector2( 0.75, 0.75 )
+
 [node name="EvidenceCard8" parent="Page" instance=ExtResource( 2 )]
-position = Vector2( 190, 102 )
+position = Vector2( 134, 102 )
 scale = Vector2( 0.75, 0.75 )
 
 [node name="EvidenceCard9" parent="Page" instance=ExtResource( 2 )]
-position = Vector2( 246, 26 )
+position = Vector2( 190, 102 )
 scale = Vector2( 0.75, 0.75 )
 
 [node name="EvidenceCard10" parent="Page" instance=ExtResource( 2 )]
@@ -109,4 +109,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_NextButton_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]
